@@ -56,10 +56,9 @@ function register(app) {
         },
       ],
     });
-    d.forEach(e=>{
-      console.log(e)
-    })
+    d.forEach((e) => {
+      console.log(e);
+    });
   });
-
 }
 module.exports = register;

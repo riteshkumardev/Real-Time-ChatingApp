@@ -1,29 +1,44 @@
 const express = require("express");
+require("dotenv").config({ path: "./.env" });
+
 const socket = require("socket.io");
 const cors = require("cors");
 const cp = require("cookie-parser");
 const app = express();
-const http=require('http')
-const server=http.createServer(app)
+const http = require("http");
+const server = http.createServer(app);
 app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+
 app.use(cors());
 app.use(cp());
-app.use(express.static('client/build/'))
-require("dotenv").config();
+app.use(express.static("client/build/"));
+app.get("/user", async (req, res) => {
+  try {
+    const getUser = await user.find({});
+    res.send({ getUser });
+  } catch (e) {
+    res.status(400).send(e);
+  }
+});
+
 require("./db/config");
 require("./routes/register")(app);
 require("./routes/validate")(app);
-require("./routes/request")(app); 
+require("./routes/request")(app);
 require("./routes/respond")(app);
 require("./routes/friends")(app);
 require("./routes/allconv")(app);
 require("./routes/getInfo")(app);
+const getInfo = require("./routes/getInfo");
 require("./routes/logout")(app);
 require("./routes/search")(app);
 require("./routes/view")(app);
 require("./routes/message")(app);
-server.listen(process.env.PORT, (e) => {
-  console.log(`listing on ${process.env.PORT}...`);
+getInfo(app);
+const port = 3000; // Replace 3000 with your desired port number
+server.listen(port, (e) => {
+  console.log(`listening on ${port}...`);
 });
 const io = socket(server, {
   cors: {

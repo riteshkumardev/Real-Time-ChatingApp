@@ -18,18 +18,18 @@ function message(app) {
         ],
       });
       const cnvId = d[0]._id;
-      const senderName=await Register.findOne({_id:data.sender});
-      const receiverName=await Register.findOne({_id:data.receiver});
+      const senderName = await Register.findOne({ _id: data.sender });
+      const receiverName = await Register.findOne({ _id: data.receiver });
       const result = await new Message({
         cid: cnvId,
         sender: data.sender,
         receiver: data.receiver,
         text: data.text,
-        sn:senderName.name,
-        rn:receiverName.name
+        sn: senderName.name,
+        rn: receiverName.name,
       });
       await result.save();
-      res.send()
+      res.send();
     };
     reg();
   });
@@ -49,7 +49,12 @@ function message(app) {
         ],
       });
       const cnvId = d[0]._id;
-      const result=await Message.find({cid:cnvId}).select({sender:1,createdAt:1,text:1,sn:1})
+      const result = await Message.find({ cid: cnvId }).select({
+        sender: 1,
+        createdAt: 1,
+        text: 1,
+        sn: 1,
+      });
       res.send(result);
     };
     reg();

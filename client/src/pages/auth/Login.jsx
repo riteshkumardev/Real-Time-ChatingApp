@@ -50,7 +50,7 @@ export default function Login(props) {
     }
     if (state.email != "" && state.password != "") {
       axios
-        .post("/api/validate", {
+        .post("http://localhost:3000/api/validate", {
           email: state.email,
           password: state.password,
         })

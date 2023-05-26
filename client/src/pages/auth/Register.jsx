@@ -2,9 +2,9 @@ import "./auth.css";
 import { useState } from "react";
 import swal from "@sweetalert/with-react";
 import axios from "axios";
-import {useHistory} from 'react-router-dom'
+import { useHistory } from "react-router-dom";
 export default function Register() {
-  let history=useHistory();
+  let history = useHistory();
   const [state, setstate] = useState({
     name: "",
     email: "",
@@ -66,14 +66,14 @@ export default function Register() {
     }
     if (state.email != "" && state.password != "" && state.name != "") {
       axios
-        .post("/api/register", {
+        .post("http://localhost:3000/api/register", {
           name: state.name,
           email: state.email,
           password: state.password,
         })
         .then((res) => {
-          swal(res.data.msg, "", res.data.type).then(e=>{
-            history.push('/auth')
+          swal(res.data.msg, "", res.data.type).then((e) => {
+            history.push("/auth");
           });
         });
     }

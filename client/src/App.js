@@ -21,7 +21,7 @@ export default function App() {
   const [loaded, setLoaded] = useState(null);
   const [viewUser, setviewUser] = useState(0);
   useEffect(() => {
-    axios.post("/info").then((e) => {
+    axios.post("http://localhost:3000/info").then((e) => {
       setLoaded(true);
       setUser(e.data);
     });

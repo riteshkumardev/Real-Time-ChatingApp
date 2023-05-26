@@ -3,10 +3,8 @@ const Register = require("../models/register");
 function allconv(app) {
   app.post("/info", async (req, res) => {
     try {
-      const userInfo = await jwt.verify(
-        req.cookies.cookieName,
-        process.env.KEY
-      );
+      const { cookieName } = req.cookies;
+      const userInfo = await jwt.verify(cookieName, process.env.KEY);
       if (userInfo) {
         const result = await Register.findOne({ _id: userInfo.uid });
         const vst = {
@@ -15,10 +13,11 @@ function allconv(app) {
           friends: result.friends.length,
           preq: result.request.length,
         };
-        res.json(vst);
+        return res.json(vst);
       }
+      return res.json(null);
     } catch (e) {
-      res.json(null);
+      return res.json(null);
     }
   });
 }

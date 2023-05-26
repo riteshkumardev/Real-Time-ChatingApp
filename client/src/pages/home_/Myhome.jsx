@@ -37,11 +37,13 @@ export default function Myhome(props) {
   }
   useEffect(() => {
     setUser(null);
-    axios.post("/info", { withCredentials: true }).then((e) => {
-      setUser(e.data);
-      props.setUser(e.data)
-      fetchFriendreq();
-    });
+    axios
+      .post("http://localhost:3000/info", { withCredentials: true })
+      .then((e) => {
+        setUser(e.data);
+        props.setUser(e.data);
+        fetchFriendreq();
+      });
   }, []);
   const search = (e) => {
     if (e.target.value.length > 0) {
@@ -167,7 +169,7 @@ const Friends = (props) => {
 const Friendreq = (props) => {
   return (
     <>
-      <div className="frow" style={{marginTop:"1rem"}}>
+      <div className="frow" style={{ marginTop: "1rem" }}>
         <div style={{ display: "flex", alignItems: "center" }}>
           <div className="fimage">
             <img src="/images/android-chrome-512x512.png" alt="" />
@@ -203,7 +205,7 @@ const Srch = (props) => {
   let history = useHistory();
   function handleClick() {
     props.setUser(props.uid);
-    history.push("/view/"+props.uid);
+    history.push("/view/" + props.uid);
   }
   return (
     <span

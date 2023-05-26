@@ -1,7 +1,7 @@
 const Register = require("../models/register");
 const jwt = require("jsonwebtoken");
 function validate(app) {
-  app.post("/api/search", (req, res) => {
+  app.post("http://localhost:3000/api/search", (req, res) => {
     var match = new RegExp(`${req.body.si}`, "i");
     const reg = async () => {
       const crs = await Register.find({ name: { $regex: match } }).select({
